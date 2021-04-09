@@ -1,0 +1,21 @@
+
+* Building
+- floor
+- scheduler
+* elevator
+- capacity (number of people)
+- direction
+  + floor
+*
+
+
+* floor
+* door
+* clock
+* person
+* button
+* scheduler
+* General guidelines
+*
+*
+- first come first serve
