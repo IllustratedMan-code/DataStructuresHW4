@@ -7,14 +7,18 @@
 #include <memory>
 
 class floor{
-    int height;
+    int floorNumber;
     std::vector<person> people; //people on floor
     button UP; // up button outside elevator
     button DOWN; // down button outside elevator
-
-public:
-    bool getstate();
-    bool getDirection();
+    void setButtons();
+    bool elevatorOnFloor;
+    public:
+        floor(int height);
+        void addPerson(person P);
+        int getHeight();
+        bool getState();
+        bool getDirection();
 };
 
 
