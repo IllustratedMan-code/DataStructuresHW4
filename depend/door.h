@@ -1,13 +1,14 @@
-#ifndef door
-#define door
+#ifndef door_H
+#define door_H
 
 class door{
   protected:
-  bool dooropen;
-    public:
+    bool dooropen;
+
+  public:
     int getdoor();   //sets whether the door 
     void setdoor(bool dooropen);
-    void dooropen(int floornumber, bool dooropen);
+    void doorOpen(int floornumber, bool dooropen);
     
 };
 

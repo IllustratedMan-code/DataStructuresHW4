@@ -4,16 +4,15 @@
 
 
 
-
 //Door class
-void door::dooropen(int x, bool d){
+void door::doorOpen(int x, bool d){
   if(d == true){
     std::cout << "Door on floor" << x << "has opened."  << std::endl;
   }else{
     std::cout << "Door has not opened." << std::endl;
   }
 };
-int door::getdoor(){return(doorOpen);};
+int door::getdoor(){return(dooropen);};
 void door::setdoor(bool c){dooropen = c;};
 
 //Button class
