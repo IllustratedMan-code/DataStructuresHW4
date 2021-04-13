@@ -3,12 +3,12 @@
 #include "floor.h"
 #include "elevator.h"
 #include <vector>
-
+#include "scheduler.h"
 
 class building{
     std::vector<floor> floors;
     std::vector<elevator> elevators;
-    clock C;
+    scheduler S;
     public:
 
 
