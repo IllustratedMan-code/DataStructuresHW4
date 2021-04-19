@@ -1,24 +1,25 @@
 #include "elevator.h"
 #include <vector>
 
-void elevator::call(int floorNumber){
+void elevator::call(int floorNumber) {}
 
-}
-
-void elevator::move(){
-
-}
-
-void elevator::setButtons(){
-    for(auto &p : People){
-
-        if(b.getbutton()){
-
-        }
+void elevator::move() {
+  if (floorsToVisit.size() > 0) {
+    setDirection();
+    if (direction) {
+      CurrentFloor++;
+    } else {
+      CurrentFloor--;
     }
+  }
 }
 
-bool elevator::getDirection(){
-
-    return direction;
+void elevator::setButtons() {
+  for (auto &p : People) {
+    auto d = p.getDestination();
+    Buttons[d - MinFloor].setbutton(1);
+    floorsToVisit.push(d);
+  }
 }
+
+bool elevator::getDirection() { return direction; }

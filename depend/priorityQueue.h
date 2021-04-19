@@ -1,6 +1,7 @@
 #ifndef priorityQueue_H
 #define priorityQueue_H
 
+#include <bits/c++config.h>
 #include <iostream>
 #include <deque>
 #include <iterator>
@@ -9,17 +10,15 @@
 template<class T>
 class priorityQueue{
     std::deque<T> items;
-    bool large;
     public:
 
         void push(T item){
             for(int i=0; i<items.size(); i++){
-                if(large){
                     if(item <= items[i]){
                         items.insert(items.begin() + i, item);
                         return;
                     }
-                }}
+                }
             items.push_back(item);
         }
         T popBack(){
@@ -39,6 +38,9 @@ class priorityQueue{
         }
         auto end(){
             return(items.end());
+        }
+        auto size(){
+            return(items.size());
         }
 };
 
