@@ -16,9 +16,10 @@ class floor{
     bool elevatorOnFloor;
     std::shared_ptr<elevator> e; //pointer to elevator
     public:
-        floor(int height);
+        floor(int height, std::shared_ptr<elevator> e);
         void addPerson(person P);
         int getFloor();
+        bool hasElevator();
 };
 
 

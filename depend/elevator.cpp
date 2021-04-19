@@ -10,5 +10,15 @@ void elevator::move(){
 }
 
 void elevator::setButtons(){
+    for(auto &p : People){
 
+        if(b.getbutton()){
+
+        }
+    }
+}
+
+bool elevator::getDirection(){
+
+    return direction;
 }

@@ -7,9 +7,9 @@
 
 class building{
     std::vector<floor> floors;
-    std::vector<elevator> elevators;
     scheduler S;
     public:
+        void addFloor(floor);
 
 
 };

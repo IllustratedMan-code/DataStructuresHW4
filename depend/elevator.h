@@ -15,12 +15,13 @@ class elevator{
     void setButtons(); // sets buttons in elevator
     bool direction = false; //up or down
     void setDirection(); // sets direction of elevator
-    priorityQueue<person> People(); // people in elevator
+    priorityQueue<person> People; // people in elevator
+    priorityQueue<int> floorsToVisit;
     public:
         void call(int floorNumber);
         void move(); //moves elevator to another floor
-        std::vector<person> Exit(); // returns vector of people leaving elevator and removes them from the queue
-        void addPerson(person P); // adds person to elevator
+        std::vector<person> Unload(); // returns vector of people leaving elevator and removes them from the queue
+        void load(std::vector<person> PeopleGettingOnElevator); // adds person to elevator
         bool getDirection(); //gets current direction of the elevator
 };
 

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <deque>
+#include <iterator>
 
 
 template<class T>
@@ -32,6 +33,12 @@ class priorityQueue{
         }
         T Back(){
             return(items.back());
+        }
+        auto begin(){
+            return(items.begin());
+        }
+        auto end(){
+            return(items.end());
         }
 };
 
