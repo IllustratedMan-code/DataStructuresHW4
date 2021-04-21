@@ -10,13 +10,8 @@ private:
    void delayTime( const floor & ); // delay arrival to floor
    void createNewPerson( floor & ); // create person and floor placement
    void handleArrivals( floor &, int ); // handle arrivals
-
+   
    int currentClockTime;
-
-   floor &floor1Ref;
-   floor &floor2Ref;
-   int floor1ArrivalTime;
-   int floor2ArrivalTime;
 
 public:
    scheduler( floor &, floor & );    
