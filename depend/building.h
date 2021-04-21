@@ -1,17 +1,19 @@
 #ifndef building_H
 #define building_H
-#include "floor.h"
 #include "elevator.h"
-#include <vector>
+#include "floor.h"
 #include "scheduler.h"
+#include <memory>
+#include <vector>
 
-class building{
-    std::vector<floor> floors;
-    scheduler S;
-    public:
-        void addFloor(floor);
+class building {
+  std::vector<floor> floors;
+  std::vector<std::shared_ptr<elevator>> elevators;
+  scheduler S;
 
-
+public:
+  void addFloor(floor F);
+  void Tick(); // advance time
 };
 
 #endif

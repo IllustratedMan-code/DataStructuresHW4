@@ -17,6 +17,7 @@ class floor {
   std::shared_ptr<elevator> e; // pointer to elevator
   void Load(std::vector<person> P);
   std::vector<person> Unload();
+  friend class building;
 
 public:
   floor(int height, std::shared_ptr<elevator> e);
