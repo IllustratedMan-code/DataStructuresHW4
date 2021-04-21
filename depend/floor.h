@@ -16,7 +16,7 @@ class floor {
   bool elevatorOnFloor;
   std::shared_ptr<elevator> e; // pointer to elevator
   void Load(std::vector<person> P);
-  std::vector<person> Unload();
+  std::vector<person> Unload(int NumberOfPeople);
   friend class building;
 
 public:

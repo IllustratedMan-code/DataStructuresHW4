@@ -28,6 +28,7 @@ public:
   void move(); // moves elevator to another floor
   bool IsOpen();
   int getCurrentFloor();
+  int getRemainingCapacity();
   void
   Load(std::vector<person> PeopleGettingOnElevator); // adds people to elevator
 };

@@ -71,3 +71,10 @@ void elevator::deleteFloorRepeats() {
     V = f;
   }
 }
+int elevator::getRemainingCapacity() { return Capacity - People.size(); }
+
+void elevator::Load(std::vector<person> PeopleGettingOnElevator) {
+  for (auto &p : PeopleGettingOnElevator) {
+    People.push(p);
+  }
+}
