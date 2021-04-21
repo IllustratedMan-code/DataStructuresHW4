@@ -1,15 +1,22 @@
 #include "elevator.h"
+#include "priorityQueue.h"
 #include <vector>
 
-void elevator::call(int floorNumber) {}
+void elevator::call(int floorNumber) { floorsToVisit.push(floorNumber); }
 
 void elevator::move() {
   if (floorsToVisit.size() > 0) {
     setDirection();
     if (direction) {
       CurrentFloor++;
+      if (floorsToVisit.Back() == CurrentFloor) {
+        ElevatorDoor.setdoor(1);
+      }
     } else {
       CurrentFloor--;
+      if (floorsToVisit.Front() == CurrentFloor) {
+        ElevatorDoor.setdoor(1);
+      }
     }
   }
 }
@@ -20,6 +27,47 @@ void elevator::setButtons() {
     Buttons[d - MinFloor].setbutton(1);
     floorsToVisit.push(d);
   }
+  deleteFloorRepeats();
 }
 
-bool elevator::getDirection() { return direction; }
+void elevator::setDirection() {
+  if (CurrentFloor < floorsToVisit.Front() &&
+      CurrentFloor > floorsToVisit.Back()) {
+    return;
+  }
+  if (CurrentFloor < floorsToVisit.Back()) {
+    direction = true;
+    return;
+  }
+  if (CurrentFloor > floorsToVisit.Front()) {
+    direction = false;
+    return;
+  }
+}
+
+std::vector<person> elevator::Unload() {
+  std::vector<person> UnloadedPeople;
+  while (People.size() > 0)
+    if (People.Back().getDestination() == CurrentFloor) {
+      People.popBack();
+    } else if (People.Front().getDestination() == CurrentFloor) {
+      People.popFront();
+    } else {
+      break;
+    }
+  return UnloadedPeople;
+}
+
+bool elevator::IsOpen() { return ElevatorDoor.getdoor(); }
+int elevator::getCurrentFloor() { return CurrentFloor; }
+void elevator::deleteFloorRepeats() {
+  priorityQueue<int> newPriorityQueue;
+  auto V = floorsToVisit.Front();
+  newPriorityQueue.push(V);
+  for (auto &f : floorsToVisit) {
+    if (V != f) {
+      newPriorityQueue.push(V);
+    }
+    V = f;
+  }
+}
