@@ -78,3 +78,9 @@ void elevator::Load(std::vector<person> PeopleGettingOnElevator) {
     People.push(p);
   }
 }
+
+elevator::elevator(int MinFloor, int MaxFloor) {
+  this->MaxFloor = MaxFloor;
+  this->MinFloor = MinFloor;
+  CurrentFloor = MinFloor;
+}

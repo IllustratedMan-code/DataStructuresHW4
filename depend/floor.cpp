@@ -1,5 +1,6 @@
 #include "floor.h"
 #include "priorityQueue.h"
+#include <memory>
 #include <vector>
 
 int floor::getFloor() { return (floorNumber); }
@@ -36,4 +37,8 @@ std::vector<person> floor::Unload(int NumberOfPeople) {
     people.pop();
   }
   return TempPeople;
+}
+floor::floor(int height, std::shared_ptr<elevator> e) {
+  floorNumber = height;
+  this->e = e;
 }

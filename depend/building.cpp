@@ -22,3 +22,9 @@ void building::Tick() {
     f.CheckElevator();
   }
 }
+
+void building::Print() {
+  for (auto &e : elevators) {
+    std::cout << "Elevator On floor " << e->getCurrentFloor() << std::endl;
+  }
+}

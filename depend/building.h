@@ -9,11 +9,11 @@
 class building {
   std::vector<floor> floors;
   std::vector<std::shared_ptr<elevator>> elevators;
-  scheduler S;
 
 public:
   void addFloor(floor F);
   void Tick(); // advance time
+  void Print();
 };
 
 #endif

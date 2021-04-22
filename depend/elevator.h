@@ -22,6 +22,7 @@ class elevator {
   door ElevatorDoor;
 
 public:
+  elevator(int MaxFloor, int MinFloor);
   std::vector<person> Unload(); // returns vector of people leaving
                                 // elevator and removes them from the queue
   void call(int floorNumber);
