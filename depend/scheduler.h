@@ -35,7 +35,7 @@ class event {
 
 public:
   event(std::string FloorName, int NumberOfPeople, int time);
-}
+};
 
 #endif
 

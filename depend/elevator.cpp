@@ -1,21 +1,34 @@
 #include "elevator.h"
 #include "priorityQueue.h"
+#include <iostream>
 #include <vector>
 
 void elevator::call(int floorNumber) { floorsToVisit.push(floorNumber); }
 
 void elevator::move() {
+  deleteFloorRepeats();
+  std::cout << floorsToVisit.size() << " f" << std::endl;
   if (floorsToVisit.size() > 0) {
     setDirection();
     if (direction) {
-      CurrentFloor++;
-      if (floorsToVisit.Back() == CurrentFloor) {
-        ElevatorDoor.setdoor(1);
+      if (CurrentFloor + 1 <= MaxFloor) {
+        CurrentFloor++;
       }
-    } else {
-      CurrentFloor--;
       if (floorsToVisit.Front() == CurrentFloor) {
         ElevatorDoor.setdoor(1);
+        floorsToVisit.popFront();
+      } else {
+        ElevatorDoor.setdoor(0);
+      }
+    } else {
+      if (CurrentFloor - 1 >= MinFloor) {
+        CurrentFloor--;
+      }
+      if (floorsToVisit.Back() == CurrentFloor) {
+        ElevatorDoor.setdoor(1);
+        floorsToVisit.popBack();
+      } else {
+        ElevatorDoor.setdoor(0);
       }
     }
   }
@@ -27,7 +40,6 @@ void elevator::setButtons() {
     Buttons[d - MinFloor].setbutton(1);
     floorsToVisit.push(d);
   }
-  deleteFloorRepeats();
 }
 
 void elevator::setDirection() {
@@ -59,16 +71,20 @@ std::vector<person> elevator::Unload() {
 }
 
 bool elevator::IsOpen() { return ElevatorDoor.getdoor(); }
+
 int elevator::getCurrentFloor() { return CurrentFloor; }
+
 void elevator::deleteFloorRepeats() {
   priorityQueue<int> newPriorityQueue;
-  auto V = floorsToVisit.Front();
-  newPriorityQueue.push(V);
-  for (auto &f : floorsToVisit) {
-    if (V != f) {
+  while (floorsToVisit.size() > 0) {
+    auto V = floorsToVisit.popBack();
+    if (newPriorityQueue.size() == 0 || V != newPriorityQueue.Back()) {
       newPriorityQueue.push(V);
     }
-    V = f;
+  }
+  floorsToVisit = newPriorityQueue;
+  for (auto &f : floorsToVisit) {
+    std::cout << "b::" << f << std::endl;
   }
 }
 int elevator::getRemainingCapacity() { return Capacity - People.size(); }
@@ -77,10 +93,16 @@ void elevator::Load(std::vector<person> PeopleGettingOnElevator) {
   for (auto &p : PeopleGettingOnElevator) {
     People.push(p);
   }
+  setButtons();
 }
 
-elevator::elevator(int MinFloor, int MaxFloor) {
+elevator::elevator(int MinFloor, int MaxFloor, int Capacity) {
   this->MaxFloor = MaxFloor;
   this->MinFloor = MinFloor;
+  this->Capacity = Capacity;
   CurrentFloor = MinFloor;
+  for (int i = MinFloor; i < MaxFloor; i++) {
+    button b;
+    Buttons.push_back(b);
+  }
 }

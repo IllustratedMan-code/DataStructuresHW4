@@ -1,22 +1,15 @@
 #include "scheduler.h"
-#include <iostream>
-#include <string>
-#inlcude "scheduler.h"
 #include "elevator.h"
-#include "person.h";
+#include "person.h"
+#include "scheduler.h"
+#include <iostream>
 #include <stdlib.h>
+#include <string>
 #include <time.h>
 
 using namespace std;
 
 void scheduler::addFloor(std::shared_ptr<floor> F) { floors.push_back(F); }
-
-void scheduler::addEvent(std::string FloorName, int NumberOfPeople, int time) {
-  for (auto &f : floors) {
-    if (f->getFloorName() == FloorName) {
-    }
-  }
-}
 
 void scheduler::processTime(int time) {
   for (auto &e : events) {
@@ -30,12 +23,12 @@ void scheduler::createPeople(std::string FloorName, int NumberOfPeople) {
   for (auto &f : floors) {
     if (f->getFloorName() == FloorName) {
       std::vector<person> newPeople;
-      srand(time(NULL));
       for (int i = 0; i < NumberOfPeople; i++) {
         int Destination = rand() % f->e->MaxFloor + f->e->MinFloor;
         if (Destination == f->floorNumber) {
-          Destination++;
+          Destination;
         }
+        std::cout << Destination << std::endl;
         person P(f->floorNumber, Destination);
         newPeople.push_back(P);
       }

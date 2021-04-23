@@ -1,4 +1,5 @@
 #include "building.h"
+#include "scheduler.h"
 #include <algorithm>
 #include <memory>
 
@@ -18,16 +19,29 @@ void building::addFloor(floor F) {
 }
 
 void building::Tick() {
+  C.tick();
+  S.processTime(C.getTime());
+  for (auto &f : floors) {
+    f->CheckElevator();
+  }
   for (auto &e : elevators) {
     e->move();
-  }
-  for (auto &f : floors) {
-    f.CheckElevator();
   }
 }
 
 void building::Print() {
   for (auto &e : elevators) {
-    std::cout << "Elevator On floor " << e->getCurrentFloor() << std::endl;
+    std::cout << "Elevator On floor: " << e->getCurrentFloor() << std::endl;
+    std::cout << "Elevator Capacity: " << e->getRemainingCapacity()
+              << std::endl;
+    std::cout << std::endl;
   }
+  for (auto &f : floors) {
+    std::cout << f->name << ": " << f->people.size() << std::endl;
+  }
+}
+
+void building::addEvent(std::string floorName, int NumberOfPeople, int time) {
+  event e(floorName, NumberOfPeople, time);
+  S.addEvent(e);
 }

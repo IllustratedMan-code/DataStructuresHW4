@@ -23,7 +23,7 @@ class elevator {
   friend class scheduler;
 
 public:
-  elevator(int MaxFloor, int MinFloor);
+  elevator(int MaxFloor, int MinFloor, int Capacity);
   std::vector<person> Unload(); // returns vector of people leaving
                                 // elevator and removes them from the queue
   void call(int floorNumber);

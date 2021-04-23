@@ -20,9 +20,11 @@ void floor::setButtons() {
 
 void floor::CheckElevator() {
   if (e->getCurrentFloor() == floorNumber && e->IsOpen()) {
-    Load(e->Unload());
+    e->Unload();
+    // Load(e->Unload());
     e->Load(Unload(e->getRemainingCapacity()));
   }
+  setButtons();
 }
 
 void floor::Load(std::vector<person> P) {
@@ -33,7 +35,10 @@ void floor::Load(std::vector<person> P) {
 
 std::vector<person> floor::Unload(int NumberOfPeople) {
   std::vector<person> TempPeople;
-  for (int i; i < NumberOfPeople; i++) {
+  for (int i = 0; i < NumberOfPeople; i++) {
+    if (people.size() <= 0) {
+      return TempPeople;
+    }
     TempPeople.push_back(people.front());
     people.pop();
   }
@@ -50,3 +55,4 @@ floor::floor(const floor &F) {
   this->floorNumber = F.floorNumber;
   this->name = F.name;
 }
+std::string floor::getFloorName() { return name; }
