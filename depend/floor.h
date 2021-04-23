@@ -5,6 +5,7 @@
 #include "person.h"
 #include <memory>
 #include <queue>
+#include <string>
 #include <vector>
 
 class floor {
@@ -15,13 +16,17 @@ class floor {
   void setButtons();
   bool elevatorOnFloor;
   std::shared_ptr<elevator> e; // pointer to elevator
-  void Load(std::vector<person> P);
   std::vector<person> Unload(int NumberOfPeople);
   friend class building;
+  friend class scheduler;
+  std::string name;
 
 public:
-  floor(int height, std::shared_ptr<elevator> e);
+  void Load(std::vector<person> P);
+  floor(std::string name, int height, std::shared_ptr<elevator> e);
+  floor(const floor &F);
   int getFloor();
+  std::string getFloorName();
   void CheckElevator();
 };
 

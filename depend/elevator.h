@@ -20,6 +20,7 @@ class elevator {
   priorityQueue<int> floorsToVisit;
   void deleteFloorRepeats();
   door ElevatorDoor;
+  friend class scheduler;
 
 public:
   elevator(int MaxFloor, int MinFloor);

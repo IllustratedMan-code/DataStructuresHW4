@@ -7,8 +7,9 @@
 #include <vector>
 
 class building {
-  std::vector<floor> floors;
+  std::vector<std::shared_ptr<floor>> floors;
   std::vector<std::shared_ptr<elevator>> elevators;
+  scheduler S;
 
 public:
   void addFloor(floor F);

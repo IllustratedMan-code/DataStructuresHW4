@@ -1,8 +1,11 @@
 #include "building.h"
 #include <algorithm>
+#include <memory>
 
 void building::addFloor(floor F) {
-  floors.push_back(F);
+  std::shared_ptr<floor> NewF(new floor(F));
+  floors.push_back(NewF);
+  S.addFloor(NewF);
   bool check = false;
   for (auto &e : elevators) {
     if (e == F.e) {
