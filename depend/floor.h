@@ -27,7 +27,7 @@ public:
   floor(const floor &F);
   int getFloor();
   std::string getFloorName();
-  void CheckElevator();
+  int CheckElevator();
 };
 
 #endif

@@ -21,12 +21,14 @@ void building::addFloor(floor F) {
 void building::Tick() {
   C.tick();
   S.processTime(C.getTime());
+  int s = 0;
   for (auto &f : floors) {
-    f->CheckElevator();
+    s += f->CheckElevator();
   }
   for (auto &e : elevators) {
     e->move();
   }
+  DestinationSum = s;
 }
 
 void building::Print() {
@@ -34,11 +36,15 @@ void building::Print() {
     std::cout << "Elevator On floor: " << e->getCurrentFloor() << std::endl;
     std::cout << "Elevator Capacity: " << e->getRemainingCapacity()
               << std::endl;
-    std::cout << std::endl;
   }
   for (auto &f : floors) {
     std::cout << f->name << ": " << f->people.size() << std::endl;
   }
+  std::cout << DestinationSum << " People have reached their destination."
+            << std::endl;
+  std::cout << "The current time in building ticks is: " << C.getTime()
+            << std::endl;
+  std::cout << std::endl;
 }
 
 void building::addEvent(std::string floorName, int NumberOfPeople, int time) {

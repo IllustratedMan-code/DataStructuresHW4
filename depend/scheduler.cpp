@@ -28,7 +28,6 @@ void scheduler::createPeople(std::string FloorName, int NumberOfPeople) {
         if (Destination == f->floorNumber) {
           Destination;
         }
-        std::cout << Destination << std::endl;
         person P(f->floorNumber, Destination);
         newPeople.push_back(P);
       }

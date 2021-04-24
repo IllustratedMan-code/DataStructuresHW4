@@ -18,13 +18,16 @@ void floor::setButtons() {
   }
 }
 
-void floor::CheckElevator() {
+int floor::CheckElevator() {
+  int s = 0;
   if (e->getCurrentFloor() == floorNumber && e->IsOpen()) {
-    e->Unload();
+    auto i = e->Unload();
+    s = i.size();
     // Load(e->Unload());
     e->Load(Unload(e->getRemainingCapacity()));
   }
   setButtons();
+  return (s);
 }
 
 void floor::Load(std::vector<person> P) {

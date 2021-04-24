@@ -13,6 +13,7 @@ class building {
   std::vector<std::shared_ptr<elevator>> elevators;
   scheduler S;
   class clock C;
+  int DestinationSum = 0;
 
 public:
   void addFloor(floor F);

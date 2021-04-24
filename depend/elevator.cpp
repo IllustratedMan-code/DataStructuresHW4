@@ -7,7 +7,8 @@ void elevator::call(int floorNumber) { floorsToVisit.push(floorNumber); }
 
 void elevator::move() {
   deleteFloorRepeats();
-  std::cout << floorsToVisit.size() << " f" << std::endl;
+  std::cout << floorsToVisit.Front() << " " << CurrentFloor << " "
+            << floorsToVisit.size() << std::endl;
   if (floorsToVisit.size() > 0) {
     setDirection();
     if (direction) {
@@ -17,6 +18,7 @@ void elevator::move() {
       if (floorsToVisit.Front() == CurrentFloor) {
         ElevatorDoor.setdoor(1);
         floorsToVisit.popFront();
+        std::cout << "Hey!";
       } else {
         ElevatorDoor.setdoor(0);
       }
@@ -61,9 +63,9 @@ std::vector<person> elevator::Unload() {
   std::vector<person> UnloadedPeople;
   while (People.size() > 0)
     if (People.Back().getDestination() == CurrentFloor) {
-      People.popBack();
+      UnloadedPeople.push_back(People.popBack());
     } else if (People.Front().getDestination() == CurrentFloor) {
-      People.popFront();
+      UnloadedPeople.push_back(People.popFront());
     } else {
       break;
     }
@@ -84,7 +86,7 @@ void elevator::deleteFloorRepeats() {
   }
   floorsToVisit = newPriorityQueue;
   for (auto &f : floorsToVisit) {
-    std::cout << "b::" << f << std::endl;
+    std::cout << "f:: " << f << std::endl;
   }
 }
 int elevator::getRemainingCapacity() { return Capacity - People.size(); }
