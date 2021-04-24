@@ -7,32 +7,31 @@ void elevator::call(int floorNumber) { floorsToVisit.push(floorNumber); }
 
 void elevator::move() {
   deleteFloorRepeats();
-  std::cout << floorsToVisit.Front() << " " << CurrentFloor << " "
-            << floorsToVisit.size() << std::endl;
   if (floorsToVisit.size() > 0) {
     setDirection();
     if (direction) {
       if (CurrentFloor + 1 <= MaxFloor) {
         CurrentFloor++;
       }
-      if (floorsToVisit.Front() == CurrentFloor) {
-        ElevatorDoor.setdoor(1);
-        floorsToVisit.popFront();
-        std::cout << "Hey!";
-      } else {
-        ElevatorDoor.setdoor(0);
-      }
     } else {
       if (CurrentFloor - 1 >= MinFloor) {
         CurrentFloor--;
       }
-      if (floorsToVisit.Back() == CurrentFloor) {
-        ElevatorDoor.setdoor(1);
-        floorsToVisit.popBack();
-      } else {
-        ElevatorDoor.setdoor(0);
-      }
     }
+    ElevatorDoor.setdoor(0);
+    priorityQueue<int> TempFloors;
+    while (floorsToVisit.size() > 0) {
+      if (floorsToVisit.Front() == CurrentFloor) {
+        ElevatorDoor.setdoor(1);
+        floorsToVisit.popFront();
+        std::cout << "Hey!";
+      }
+      if (floorsToVisit.size() == 0) {
+        break;
+      }
+      TempFloors.push(floorsToVisit.popFront());
+    }
+    floorsToVisit = TempFloors;
   }
 }
 
