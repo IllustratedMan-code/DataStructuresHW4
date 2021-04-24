@@ -9,17 +9,22 @@
 #include <vector>
 
 class building {
-  std::vector<std::shared_ptr<floor>> floors;
-  std::vector<std::shared_ptr<elevator>> elevators;
-  scheduler S;
-  class clock C;
-  int DestinationSum = 0;
+  std::vector<std::shared_ptr<floor>> floors;       // floors in the building
+  std::vector<std::shared_ptr<elevator>> elevators; // elevators in the building
+  scheduler S;   // Scheduler spawns people on floors
+  class clock C; // keeps track of the current time in the building
+  std::vector<person>
+      UnloadedPeople; // people that are being Unloaded onto floors from the
+                      // elevator in the current tick
 
 public:
-  void addFloor(floor F);
-  void addEvent(std::string floorName, int NumberOfPeople, int time);
-  void Tick(); // advance time
-  void Print();
+  void addFloor(floor F); // adds a floor
+  void
+  addEvent(std::string floorName, int NumberOfPeople,
+           int time); // adds a scheduler entry that will spawn a certain number
+                      // of randomly generated people at a specific time
+  void Tick();        // advance time by one tick in the building
+  void Print();       // prints aspects of the building
 };
 
 #endif

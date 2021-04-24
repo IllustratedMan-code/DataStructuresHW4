@@ -6,6 +6,9 @@
 void elevator::call(int floorNumber) { floorsToVisit.push(floorNumber); }
 
 void elevator::move() {
+  for (auto &p : People) {
+    p.incrementElevatorTickCount();
+  }
   deleteFloorRepeats();
   if (floorsToVisit.size() > 0) {
     setDirection();
@@ -24,7 +27,6 @@ void elevator::move() {
       if (floorsToVisit.Front() == CurrentFloor) {
         ElevatorDoor.setdoor(1);
         floorsToVisit.popFront();
-        std::cout << "Hey!";
       }
       if (floorsToVisit.size() == 0) {
         break;
@@ -84,9 +86,6 @@ void elevator::deleteFloorRepeats() {
     }
   }
   floorsToVisit = newPriorityQueue;
-  for (auto &f : floorsToVisit) {
-    std::cout << "f:: " << f << std::endl;
-  }
 }
 int elevator::getRemainingCapacity() { return Capacity - People.size(); }
 

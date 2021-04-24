@@ -10,7 +10,7 @@ template <class T> class priorityQueue {
   std::deque<T> items;
 
 public:
-  void push(T item) {
+  void push(T item) { // adds an item to the queue
     for (int i = 0; i < items.size(); i++) {
       if (item <= items[i]) {
         items.insert(items.begin() + i, item);
@@ -19,21 +19,21 @@ public:
     }
     items.push_back(item);
   }
-  T popBack() {
+  T popBack() { // pops the back and returns it
     auto item = items.back();
     items.pop_back();
     return item;
   }
-  T popFront() {
+  T popFront() { // pops the front and returns it
     auto item = items.front();
     items.pop_front();
     return (item);
   }
-  T Front() { return (items.front()); }
-  T Back() { return (items.back()); }
-  auto begin() { return (items.begin()); }
-  auto end() { return (items.end()); }
-  auto size() { return (items.size()); }
+  T Front() { return (items.front()); }    // returns the front
+  T Back() { return (items.back()); }      // returns the back
+  auto begin() { return (items.begin()); } // needed for iteration loops
+  auto end() { return (items.end()); }     // needed for iteration loops
+  auto size() { return (items.size()); }   // needed for iteration loops
 };
 
 #endif

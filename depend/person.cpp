@@ -3,9 +3,13 @@
 using namespace std;
 
 person::operator int() { return Destination; }
+
 int person::getCurrentFloor() { return CurrentFloor; }
+
 int person::getDestination() { return Destination; }
+
 bool person::getDirection() { return Direction; }
+
 person::person(int CurrentFloor, int Destination) {
   this->CurrentFloor = CurrentFloor;
   this->Destination = Destination;
@@ -15,3 +19,11 @@ person::person(int CurrentFloor, int Destination) {
     Direction = 1;
   }
 }
+
+void person::incrementElevatorTickCount() { ElevatorTickCount++; }
+
+void person::incrementFloorTickCount() { FloorTickCount++; }
+
+int person::getElevatorTickCount() { return ElevatorTickCount; }
+
+int person::getFloorTickCount() { return FloorTickCount; }

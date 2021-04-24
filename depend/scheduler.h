@@ -11,30 +11,26 @@ class event;
 
 class scheduler {
 private:
-  void scheduleTime(const floor &); // schedule arrival to set floor
-  void delayTime(const floor &);    // delay arrival to set floor
   void createPeople(std::string FloorName,
                     int NumberOfPeople); // create person and floor placement
-  void handleArrivals(floor &, int);     // handle arrivals
 
-  int currentClockTime;
-  std::vector<std::shared_ptr<floor>> floors;
-  std::vector<event> events;
+  std::vector<std::shared_ptr<floor>> floors; // pointers to floors
+  std::vector<event> events; // events that the scheduler executes
 
 public:
-  void addFloor(std::shared_ptr<floor> F);
-  void addEvent(event E);
-  void processTime(int); // set scheduler's time
+  void addFloor(std::shared_ptr<floor> F); // adds a floor to floors
+  void addEvent(event E);                  // adds an event to events
+  void processTime(int);                   // set scheduler's time
 };
 
-class event {
-  std::string FloorName;
-  int NumberOfPeople;
-  int time;
+class event {            // class, assembly, etc
+  std::string FloorName; // name of floor that event will occur on
+  int NumberOfPeople;    // people at event
+  int time;              // time event will occur
   friend class scheduler;
 
 public:
-  event(std::string FloorName, int NumberOfPeople, int time);
+  event(std::string FloorName, int NumberOfPeople, int time); // constructor
 };
 
 #endif

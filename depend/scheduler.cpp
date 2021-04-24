@@ -25,9 +25,6 @@ void scheduler::createPeople(std::string FloorName, int NumberOfPeople) {
       std::vector<person> newPeople;
       for (int i = 0; i < NumberOfPeople; i++) {
         int Destination = rand() % f->e->MaxFloor + f->e->MinFloor;
-        if (Destination == f->floorNumber) {
-          Destination;
-        }
         person P(f->floorNumber, Destination);
         newPeople.push_back(P);
       }

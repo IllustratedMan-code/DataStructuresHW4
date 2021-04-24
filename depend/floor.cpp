@@ -1,6 +1,7 @@
 #include "floor.h"
 #include "priorityQueue.h"
 #include <memory>
+#include <queue>
 #include <string>
 #include <vector>
 
@@ -18,16 +19,23 @@ void floor::setButtons() {
   }
 }
 
-int floor::CheckElevator() {
-  int s = 0;
+std::vector<person> floor::CheckElevator() {
+
+  std::vector<person> i;
   if (e->getCurrentFloor() == floorNumber && e->IsOpen()) {
-    auto i = e->Unload();
-    s = i.size();
-    // Load(e->Unload());
+    i = e->Unload();
     e->Load(Unload(e->getRemainingCapacity()));
   }
+  std::queue<person> TempQueue;
+  while (!people.empty()) {
+    auto p = people.front();
+    p.incrementFloorTickCount();
+    TempQueue.push(p);
+    people.pop();
+  }
+  people = TempQueue;
   setButtons();
-  return (s);
+  return (i);
 }
 
 void floor::Load(std::vector<person> P) {

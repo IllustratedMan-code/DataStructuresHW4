@@ -43,13 +43,15 @@ void Repl(building &B) {
       std::cout << "Enter The number of people at the event: ";
       std::getline(std::cin, NumberOfPeople);
       std::string time;
-      std::cout << "Enter the time you would like the event to happend: ";
+      std::cout << "Enter the time you would like the event to happen: ";
       std::getline(std::cin, time);
       B.addEvent(floor, stoi(NumberOfPeople), stoi(time));
       std::cout << "The Event was added to the schedule" << std::endl;
     } else if (command.compare("Tick") == 0) {
       B.Tick();
       B.Print();
+    } else if (command.compare("Exit") == 0) {
+      return;
     } else {
       PrintCommands();
     }
@@ -58,5 +60,7 @@ void Repl(building &B) {
 
 void PrintCommands() {
   std::cout << std::endl;
-  std::cout << "Add Event" << std::endl << "Tick" << std::endl << std::endl;
+  std::cout << "Add Event" << std::endl << "Tick" << std::endl;
+  std::cout << "Exit" << std::endl << std::endl;
+  ;
 }

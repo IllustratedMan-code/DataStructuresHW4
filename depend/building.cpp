@@ -21,14 +21,15 @@ void building::addFloor(floor F) {
 void building::Tick() {
   C.tick();
   S.processTime(C.getTime());
-  int s = 0;
+  std::vector<person> UnloadedPeople;
   for (auto &f : floors) {
-    s += f->CheckElevator();
+    auto p = f->CheckElevator();
+    UnloadedPeople.insert(UnloadedPeople.end(), p.begin(), p.end());
   }
   for (auto &e : elevators) {
     e->move();
   }
-  DestinationSum = s;
+  this->UnloadedPeople = UnloadedPeople;
 }
 
 void building::Print() {
@@ -40,8 +41,15 @@ void building::Print() {
   for (auto &f : floors) {
     std::cout << f->name << ": " << f->people.size() << std::endl;
   }
-  std::cout << DestinationSum << " People have reached their destination."
+  std::cout << UnloadedPeople.size() << " People have reached their destination"
             << std::endl;
+  for (int i = 1; i <= UnloadedPeople.size(); i++) {
+    std::cout << "Person " << i << " waited at the floor for "
+              << UnloadedPeople[i - 1].getFloorTickCount()
+              << " ticks and waited on the elevator for "
+              << UnloadedPeople[i - 1].getElevatorTickCount() << " ticks."
+              << std::endl;
+  }
   std::cout << "The current time in building ticks is: " << C.getTime()
             << std::endl;
   std::cout << std::endl;
