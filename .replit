@@ -1,2 +1,2 @@
 language = "bash"
-run = "make -k && ./build/main"
+run = "make -k && ./build/Repl"
